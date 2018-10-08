@@ -6,17 +6,20 @@ import java.io.IOException;
 
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 public class ExcelUtilities
 {
-	static final String filepath = "./testData/Login Data.xlsx";
+	static final String filepath = ".\\Login_Data.xlsx";
 	public static String readdata(String sheetname, int rownum,int cellnum)
 	{
+		
 		String value = null;
 		try
 		{
-			WorkbookFactory.create(new FileInputStream(new File(filepath)));
-		}
+			Workbook wb = WorkbookFactory.create(new FileInputStream(new File(filepath)));
+			value=wb.getSheet(sheetname).getRow(rownum).getCell(cellnum).getStringCellValue().toString();
+;		}
 		catch (EncryptedDocumentException e)
 		{
 			e.printStackTrace();

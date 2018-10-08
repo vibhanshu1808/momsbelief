@@ -5,13 +5,13 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -22,7 +22,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -44,20 +43,20 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class MomsDriver implements WebDriver
 {
 
-	public static WebDriver driver;
+	public  WebDriver driver;
 	// static log4jClass log = new log4jClass();
 
-	static {
+/*	static {
 		try {
-			MomsDriver.invokeBrowser(ReadConfig.getInstance().getBrowser());
+			MomsDriver.invokeBrowser("firefox");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-	}
+	}*/
 
-	public static synchronized WebDriver invokeBrowser(String browser) throws IOException {
+	public void  invokeBrowser(String browser) throws IOException {
 
 		switch (browser) {
 
@@ -74,7 +73,7 @@ public class MomsDriver implements WebDriver
 			//cap.setCapability(FirefoxOptions.FIREFOX_OPTIONS, options.setBinary(firefoxBinary));
 			cap.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
 			System.setProperty("webdriver.gecko.driver",
-					ReadConfig.getInstance().getDriverPath().toString() + "geckodriver.exe");
+					"C:\\Users\\Abhi\\eclipse-workspace\\com.momsbelief.com\\exefiles\\geckodriver.exe");
 
 			driver = new FirefoxDriver(options);
 			driver.get(ReadConfig.getInstance().getApplicationUrl());
@@ -101,10 +100,12 @@ public class MomsDriver implements WebDriver
 			capChrome.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 			capChrome.setJavascriptEnabled(true);
 			capChrome.acceptInsecureCerts();
-			System.setProperty("webdriver.chrome.driver",
-					ReadConfig.getInstance().getDriverPath().toString() + "chromedriver");
-			driver = new ChromeDriver(capChrome);
-			driver.get(ReadConfig.getInstance().getApplicationUrl());
+			//System.setProperty("webdriver.chrome.driver",
+			//		ReadConfig.getInstance().getDriverPath().toString() + "chromedriver");
+			System.setProperty("webdriver.chrome.driver","./exefiles/chromedriver.exe");
+			driver = new ChromeDriver();
+			//driver = new ChromeDriver(capChrome);
+			//driver.get(ReadConfig.getInstance().getApplicationUrl());
 			driver.manage().window().setSize(new Dimension(1440, 900));
 			break;
 
@@ -166,7 +167,7 @@ public class MomsDriver implements WebDriver
 			 
 		}
 
-		return driver;
+		
 	}
 
 	public void close() {
@@ -174,23 +175,23 @@ public class MomsDriver implements WebDriver
 
 	}
 
-	public static WebDriver getDriver() {
+	public WebDriver  getDriver() {
 		return driver;
 	}
 
-	public static void acceptAlert() {
+	public  void acceptAlert() {
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.alertIsPresent());
 		driver.switchTo().alert().accept();
 	}
 
-	public static void dismissAlert() {
+	public  void dismissAlert() {
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.alertIsPresent());
 		driver.switchTo().alert().dismiss();
 	}
 
-	public static void waitForPageLoad() {
+	public  void waitForPageLoad() {
 		ExpectedCondition<Boolean> pageLoadCondition = new ExpectedCondition<Boolean>() {
 			public Boolean apply(WebDriver driver) {
 				return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
@@ -200,7 +201,7 @@ public class MomsDriver implements WebDriver
 		wait.until(pageLoadCondition);
 	}
 
-	public static void waitForElementToBeClickable(WebElement ele, Long... i) {
+	public  void waitForElementToBeClickable(WebElement ele, Long... i) {
 
 		if (i.length >= 1) {
 			WebDriverWait wait = new WebDriverWait(driver, i[0]);
@@ -211,13 +212,14 @@ public class MomsDriver implements WebDriver
 		}
 	}
 
-	public static void visibilityOfListLocated(List<WebElement> ele) {
+
+	public  void visibilityOfListLocated(List<WebElement> ele) {
 
 		WebDriverWait wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.visibilityOfAllElements(ele));
 	}
 
-	public static void WaitTillElementIsPresent(final WebElement ele) {
+	public  void WaitTillElementIsPresent(final WebElement ele) {
 
 		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(30, TimeUnit.SECONDS)
 				.pollingEvery(5, TimeUnit.SECONDS).ignoring(NoSuchElementException.class);
@@ -229,17 +231,17 @@ public class MomsDriver implements WebDriver
 		});
 	}
 
-	public static void selectFromDropDownByIndex(WebElement ele, int index) {
+	public  void selectFromDropDownByIndex(WebElement ele, int index) {
 
 		new Select(ele).selectByIndex(index);
 	}
 
-	public static void selectFromDropDownByVisibleText(WebElement ele, String value) {
+	public  void selectFromDropDownByVisibleText(WebElement ele, String value) {
 		waitForElementToBeClickable(ele);
 		new Select(ele).selectByVisibleText(value);
 	}
 
-	public static void uploadFile(String str) throws AWTException {
+	public  void uploadFile(String str) throws AWTException {
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e1) {
@@ -270,39 +272,39 @@ public class MomsDriver implements WebDriver
 		robot.keyRelease(KeyEvent.VK_ENTER);
 	}
 
-	public static void waitForElementToDisappear(By by) {
+	public  void waitForElementToDisappear(By by) {
 
 		WebDriverWait wait = new WebDriverWait(driver, 30);
 		wait.ignoring(StaleElementReferenceException.class).until(ExpectedConditions.invisibilityOfElementLocated(by));
 	}
 
-	public static void hoverOnElement(WebElement ele) {
+	public  void hoverOnElement(WebElement ele) {
 		Actions action = new Actions(driver);
 		action.moveToElement(ele);
 		action.build().perform();
 	}
 
-	public static void switchToDefaultContent() {
-		MomsDriver.getDriver().switchTo().defaultContent();
+	public  void switchToDefaultContent() {
+		driver.switchTo().defaultContent();
 	}
 
-	public static void switchToFrame(WebElement frame) {
+	public  void switchToFrame(WebElement frame) {
 		WebDriverWait wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(frame));
 	}
 
-	public static void switchToFrameBasedOnFrameName(String frameName) {
+	public  void switchToFrameBasedOnFrameName(String frameName) {
 		WebDriverWait wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(frameName));
 	}
 
-	public static void waitForElementToBeEnable(By by) {
+	public  void waitForElementToBeEnable(By by) {
 
 		WebDriverWait wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.presenceOfElementLocated(by));
 	}
 
-	public static void executeScript(WebElement ele) {
+	public  void executeScript(WebElement ele) {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", ele);
 	}
@@ -311,12 +313,12 @@ public class MomsDriver implements WebDriver
 		return null;
 	}
 
-	public static void switchToWindow(String strWindowName) {
+	public  void switchToWindow(String strWindowName) {
 
 		driver.switchTo().window(strWindowName);
 	}
 
-	public static void switchToDefaultWindow() {
+	public  void switchToDefaultWindow() {
 		driver.switchTo().defaultContent();
 	}
 
