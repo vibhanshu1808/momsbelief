@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 public class ExcelUtilities
@@ -17,17 +18,16 @@ public class ExcelUtilities
 		String value = null;
 		try
 		{
-			Workbook wb = WorkbookFactory.create(new FileInputStream(new File(filepath)));
-			value=wb.getSheet(sheetname).getRow(rownum).getCell(cellnum).getStringCellValue().toString();
+			Workbook workbook = WorkbookFactory.create(new FileInputStream(new File(filepath)));
+			DataFormatter formatter = new DataFormatter();
+			 value=formatter.formatCellValue(workbook.getSheet(sheetname).getRow(rownum).getCell(cellnum));
+	
 ;		}
 		catch (EncryptedDocumentException e)
 		{
 			e.printStackTrace();
 		}
-		catch (InvalidFormatException e)
-		{
-			e.printStackTrace();
-		}
+
 		catch(FileNotFoundException e)
 		{
 			e.printStackTrace();

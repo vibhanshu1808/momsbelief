@@ -2,12 +2,12 @@
 <testng-results ignored="0" total="1" passed="0" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2018-10-09T11:12:11Z" name="MomsBelief" finished-at="2018-10-09T11:12:11Z" duration-ms="701">
+  <suite started-at="2018-10-09T14:01:18Z" name="MomsBelief" finished-at="2018-10-09T14:01:28Z" duration-ms="9895">
     <groups>
     </groups>
-    <test started-at="2018-10-09T11:12:11Z" name="Test" finished-at="2018-10-09T11:12:11Z" duration-ms="701">
+    <test started-at="2018-10-09T14:01:18Z" name="Test" finished-at="2018-10-09T14:01:28Z" duration-ms="9895">
       <class name="com.mb.script.LoginTest">
-        <test-method signature="validLogin()[pri:0, instance:com.mb.script.LoginTest@5398edd0]" started-at="2018-10-09T16:42:11Z" name="validLogin" finished-at="2018-10-09T16:42:11Z" duration-ms="634" status="FAIL">
+        <test-method signature="validLogin()[pri:0, instance:com.mb.script.LoginTest@3277e499]" started-at="2018-10-09T19:31:18Z" name="validLogin" finished-at="2018-10-09T19:31:27Z" duration-ms="9253" status="FAIL">
           <exception class="java.lang.IllegalAccessError">
             <message>
               <![CDATA[tried to access method org.apache.poi.util.POILogger.log(ILjava/lang/Object;)V from class org.apache.poi.openxml4j.opc.PackageRelationshipCollection]]>
@@ -27,7 +27,7 @@
 	at org.apache.poi.openxml4j.opc.OPCPackage.open(OPCPackage.java:269)
 	at org.apache.poi.ss.usermodel.WorkbookFactory.create(WorkbookFactory.java:73)
 	at com.mb.generic.ExcelUtilities.readdata(ExcelUtilities.java:20)
-	at com.mb.script.LoginTest.validLogin(LoginTest.java:15)
+	at com.mb.script.LoginTest.validLogin(LoginTest.java:16)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
