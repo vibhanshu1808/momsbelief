@@ -72,8 +72,10 @@ public class MomsDriver implements WebDriver
 
 			//cap.setCapability(FirefoxOptions.FIREFOX_OPTIONS, options.setBinary(firefoxBinary));
 			cap.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
-			System.setProperty("webdriver.gecko.driver",
-					"C:\\Users\\Abhi\\eclipse-workspace\\com.momsbelief.com\\exefiles\\geckodriver.exe");
+			// Provide generic comments not the Static paths @Vibhanshu
+			String path=System.getProperty("user.dir")+"\\exefiles\\geckodriver.exe";
+			System.out.println(path);
+			System.setProperty("webdriver.gecko.driver",path);
 
 			driver = new FirefoxDriver(options);
 			driver.get(ReadConfig.getInstance().getApplicationUrl());

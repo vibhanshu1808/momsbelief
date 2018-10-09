@@ -1,12 +1,13 @@
 package com.mb.script;
-
 import org.testng.annotations.Test;
 
 import com.mb.generic.ExcelUtilities;
 import com.mb.generic.MomsDriver;
 import com.mb.pom.LoginPage;
 
-public class LoginTest{
+public class LoginTest
+{
+
 LoginPage lp=new LoginPage();
 
 @Test

@@ -10,7 +10,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 public class ExcelUtilities
 {
-	static final String filepath = ".\\Login_Data.xlsx";
+	static final String filepath = ".\\testData\\Login_Data.xlsx";
 	public static String readdata(String sheetname, int rownum,int cellnum)
 	{
 		
