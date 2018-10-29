@@ -21,7 +21,7 @@ public class ExcelUtilities
 			Workbook workbook = WorkbookFactory.create(new FileInputStream(new File(filepath)));
 			DataFormatter formatter = new DataFormatter();
 			 value=formatter.formatCellValue(workbook.getSheet(sheetname).getRow(rownum).getCell(cellnum));
-	
+
 ;		}
 		catch (EncryptedDocumentException e)
 		{
